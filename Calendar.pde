@@ -9,6 +9,10 @@ String[] dates;
 String[] names;
 String[] descriptions;
 
+String[] months;
+String[] days;
+String[] years;
+
 void setup() {
  //fullscreen();
  //println("You're going to make a custom calendar!");
@@ -32,4 +36,11 @@ void setup() {
 
 void draw() {
   
+}
+
+void identifyDifferentMonthFormats() {
+  for (int i = 0; i < calendarText.length/3; i++) {
+    months = split(dates[i], "/");
+    println(months[0]);
+  }
 }
