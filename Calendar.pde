@@ -11,8 +11,9 @@ String[] descriptions;
 
 void setup() {
  //fullscreen();
- println("You're going to make a custom calendar!");
- println("Open the text file called 'Text File' and add a DATE, a TITLE, and a DESCRIPTION, in that order, all on separate lines.");
+ //println("You're going to make a custom calendar!");
+ //println("Open the text file called 'Text File' and add a DATE, a TITLE, and a DESCRIPTION, in that order, all on separate lines.");
+ //println("Save the file, then Run Processing again.");
  
  calendarText = loadStrings("Text File.txt");
 
@@ -20,16 +21,13 @@ void setup() {
  names = new String[calendarText.length/3];
  descriptions = new String[calendarText.length/3];
  
- println(calendarText.length + " " + dates.length + " " + names.length + " " + descriptions.length);
- 
- //dates[0] = calendarText[0];
- for (int i = 0; i < calendarText.length - 8; i ++) {
+ dates[0] = calendarText[0];
+ for (int i = 0; i < calendarText.length/3; i ++) {
     dates[i] = calendarText[i*3];
     names[i] = calendarText[i*3+1];
-    descriptions[i] = calendarText[i*3+2];
+    descriptions[i] = calendarText[i*3+2];   
+    println(dates[i], names[i], descriptions[i]);
   }
-  
-  println(dates[0]);
 }
 
 void draw() {
