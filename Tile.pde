@@ -1,12 +1,26 @@
 class Tile {
-  float dimension;
+  float dimensionsOfTile;
   float xPosOfTile;
   float yPosOfTile;
   
-  float xPosOfText;
-  float yPosOfText;
+  float xPosOfTitleText;
+  float yPosOfTitleText;
+  
+  float xPosOfDescriptionText;
+  float yPosOfDescriptionText;
   
   Tile() {
     
+  }
+  
+  void determinePositioningOfTile() {
+    
+  }
+  
+  void determinePositioningOfText() {
+    
+  }
+  
+  void tileFlipsWhenClickedOn() {
   }
 }
