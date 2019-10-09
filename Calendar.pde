@@ -5,13 +5,11 @@
 */
 
 String[] calendarText;
-String[] dates;
-String[] names;
-String[] descriptions;
+String[] userDefinedDates;
+String[] userDefinedTitles;
+String[] userDefinedDescriptions;
 
-String[] months;
-String[] days;
-String[] years;
+String[] dateSplitIntoComponents;
 
 void setup() {
  //fullscreen();
@@ -21,30 +19,28 @@ void setup() {
  
  calendarText = loadStrings("Text File.txt");
 
- dates = new String[calendarText.length/3];
- names = new String[calendarText.length/3];
- descriptions = new String[calendarText.length/3];
+ userDefinedDates = new String[calendarText.length/3];
+ userDefinedTitles = new String[calendarText.length/3];
+ userDefinedDescriptions = new String[calendarText.length/3];
  
- dates[0] = calendarText[0];
+ userDefinedDates[0] = calendarText[0];
  for (int i = 0; i < calendarText.length/3; i ++) {
-    dates[i] = calendarText[i*3];
-    names[i] = calendarText[i*3+1];
-    descriptions[i] = calendarText[i*3+2];   
-    println(dates[i], names[i], descriptions[i]); // this works
+    userDefinedDates[i] = calendarText[i*3];
+    userDefinedTitles[i] = calendarText[i*3+1];
+    userDefinedDescriptions[i] = calendarText[i*3+2];   
+    println(userDefinedDates[i], userDefinedTitles[i], userDefinedDescriptions[i]); // this works
   }
   
-  identifyDifferentMonthFormats();
+  splitUserInputtedDate();
 }
 
 void draw() {
   
 }
 
-void identifyDifferentMonthFormats() {
+void splitUserInputtedDate() {
   for (int i = 0; i < calendarText.length/3; i++) {
-    months = split(dates[i], "/");
-    //months = split(dates[i], " ");
-    //months = split(dates[i], "-");
-    println(months[0]); // this works
+    dateSplitIntoComponents = splitTokens(userDefinedDates[i], "/-, ");
+    println(dateSplitIntoComponents); 
   }
 }
