@@ -30,8 +30,10 @@ void setup() {
     dates[i] = calendarText[i*3];
     names[i] = calendarText[i*3+1];
     descriptions[i] = calendarText[i*3+2];   
-    println(dates[i], names[i], descriptions[i]);
+    println(dates[i], names[i], descriptions[i]); // this works
   }
+  
+  identifyDifferentMonthFormats();
 }
 
 void draw() {
@@ -41,6 +43,8 @@ void draw() {
 void identifyDifferentMonthFormats() {
   for (int i = 0; i < calendarText.length/3; i++) {
     months = split(dates[i], "/");
-    println(months[0]);
+    //months = split(dates[i], " ");
+    //months = split(dates[i], "-");
+    println(months[0]); // this works
   }
 }
