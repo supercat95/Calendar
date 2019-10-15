@@ -6,9 +6,8 @@ class Tile {
   //--------------------------------------------------
   Tile(float xPos) {
     setDimensionsOfTile();
-    //xPosOfTile = width/2;
-    yPosOfTile = height/2;
-   
+    xPosOfTile = xPos;
+    yPosOfTile = height/2;   
   }
  
   //--------------------------------------------------
@@ -23,16 +22,13 @@ class Tile {
     return dimensionsOfTile;
   }
   //--------------------------------------------------
-  void set_xPositioningOfTile() {
-    
-  }
+  void set_xPositioningOfTile() {}
   
   float get_xPositioningOfTile() {
     return xPosOfTile;
   }
   
   //--------------------------------------------------
-  
   void set_yPositioningOfTile() {
     
   }

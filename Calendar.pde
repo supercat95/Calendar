@@ -85,10 +85,10 @@ void determine_xPositionsOfTilesBasedOnNumberOfTile() {
         tiles[2].xPosOfTile = width/2;
         break;
       case 4:
-        tiles[0].xPosOfTile = 17*width/5;
-        tiles[1].xPosOfTile = 7*width/5;
-        tiles[2].xPosOfTile = 17*width/5;
-        tiles[3].xPosOfTile = 7*width/5;
+        tiles[0].xPosOfTile = 3*width/10;
+        tiles[1].xPosOfTile = 7*width/10;
+        tiles[2].xPosOfTile = 3*width/10;
+        tiles[3].xPosOfTile = 7*width/10;
         break;
       default: // prints instructions on screen
         textAlign(CENTER);
