@@ -4,10 +4,10 @@ class Tile {
   float yPosOfTile;
   
   //--------------------------------------------------
-  Tile(float xPos) {
+  Tile(float xPos, float yPos) {
     setDimensionsOfTile();
-    xPosOfTile = xPos;
-    yPosOfTile = height/2;   
+    xPosOfTile = xPos;  
+    yPosOfTile = yPos;
   }
  
   //--------------------------------------------------

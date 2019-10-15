@@ -10,7 +10,7 @@ class Text extends Tile {
   float yPosOfDescriptionText;
   
   Text() {
-    super(xPos);
+    super(xPos, yPos);
 }
   
   

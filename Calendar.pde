@@ -15,6 +15,7 @@ String[] dateSplitIntoComponents;
 
 Tile[] tiles;
 float xPos;
+float yPos;
 
 void setup() {
   fullScreen();
@@ -32,7 +33,7 @@ void setup() {
   // creates the tiles
   tiles = new Tile[calendarText.length/3];
   for (int i = 0; i < calendarText.length/3; i++) {
-    tiles[i] = new Tile(xPos);
+    tiles[i] = new Tile(xPos, yPos);
   }
   println("\n" + tiles.length);
   determine_xPositionsOfTilesBasedOnNumberOfTile();  
@@ -74,21 +75,31 @@ void determine_xPositionsOfTilesBasedOnNumberOfTile() {
   switch(tiles.length) {
       case 1:
         tiles[0].xPosOfTile = width/2;
+        tiles[0].yPosOfTile = height/2;
         break;
       case 2:
         tiles[0].xPosOfTile = width/4;
+        tiles[0].yPosOfTile = height/2;
         tiles[1].xPosOfTile = 3*width/4;
+        tiles[1].yPosOfTile = height/2;
         break;
       case 3:
         tiles[0].xPosOfTile = width/6;
+        tiles[0].yPosOfTile = height/4;
         tiles[1].xPosOfTile = 5*width/6;
+        tiles[1].yPosOfTile = height/4;
         tiles[2].xPosOfTile = width/2;
+        tiles[2].yPosOfTile = 3*height/4;
         break;
       case 4:
         tiles[0].xPosOfTile = 3*width/10;
+        tiles[0].yPosOfTile = height/4;
         tiles[1].xPosOfTile = 7*width/10;
+        tiles[1].yPosOfTile = height/4;
         tiles[2].xPosOfTile = 3*width/10;
+        tiles[2].yPosOfTile = 3*height/4;
         tiles[3].xPosOfTile = 7*width/10;
+        tiles[3].yPosOfTile = 3*height/4;
         break;
       default: // prints instructions on screen
         textAlign(CENTER);
