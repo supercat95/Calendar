@@ -5,7 +5,7 @@ class Tile {
   
   //--------------------------------------------------
   Tile(float xPos) {
-    dimensionsOfTile = width/3;
+    setDimensionsOfTile();
     //xPosOfTile = width/2;
     yPosOfTile = height/2;
    
@@ -13,8 +13,9 @@ class Tile {
  
   //--------------------------------------------------
   void setDimensionsOfTile() {
+    dimensionsOfTile = width/3;
     if (tiles.length >= 3) {
-      dimensionsOfTile *= 0.75;
+      dimensionsOfTile = width/4;
     }
   }
   
@@ -42,13 +43,11 @@ class Tile {
   
   //--------------------------------------------------
   void drawTile() {
-    pushMatrix();
-      fill(255,255,255);
-      stroke(0,0,0);
-      strokeWeight(4);
-      rectMode(CENTER);
-      rect(get_xPositioningOfTile(), get_yPositioningOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
-    popMatrix(); 
+    fill(255,255,255);
+    stroke(0,0,0);
+    strokeWeight(4);
+    rectMode(CENTER);
+    rect(get_xPositioningOfTile(), get_yPositioningOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
   }
   
   void tileFlipsWhenClickedOn() {}

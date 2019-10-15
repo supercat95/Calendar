@@ -34,6 +34,7 @@ void setup() {
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i] = new Tile(xPos);
   }
+  println("\n" + tiles.length);
   determine_xPositionsOfTilesBasedOnNumberOfTile();  
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i].drawTile();
@@ -75,7 +76,7 @@ void determine_xPositionsOfTilesBasedOnNumberOfTile() {
         tiles[0].xPosOfTile = width/2;
         break;
       case 2:
-        tiles[0].xPosOfTile = width/3;
+        tiles[0].xPosOfTile = width/4;
         tiles[1].xPosOfTile = 3*width/4;
         break;
       case 3:
