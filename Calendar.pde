@@ -14,7 +14,7 @@ String[] dateSplitIntoComponents;
 Tile[] tiles;
 
 void setup() {
-  //fullscreen();
+  fullScreen();
   println("You're going to make a custom calendar!\nOpen the text file called 'Text File'\nAdd a DATE (written in any standard US format), a TITLE for the event, and a DESCRIPTION, in that order, all on separate lines.\nYou can do this up to 4 times. Do not leave blank lines.\nSave the file, then Run Processing again.\n" );
  
   // initializes and organizes variables based on user inputted data
@@ -33,20 +33,16 @@ void setup() {
     tiles[i] = new Tile();
     tiles[i].drawTheTile();
   }
-  
-  
-  // OOP-ify the following once working
-   switch(tiles.length) {
-      case 0:
-        println("Please follow the directions to create a calendar!");
-        break;
-      case 1:
-   }
-        
+       
 }
 
 void draw() {
-  
+  fill(0,0,0);
+  rect(0,0,50,50);
+  textSize(10);
+  fill(255,255,255);
+  text(pmouseX,10,10);
+  text(pmouseY,10,30);
 }
 
 // ----------------------------------------------------------------------------
