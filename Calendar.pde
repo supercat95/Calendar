@@ -17,6 +17,12 @@ Tile[] tiles;
 float xPos;
 float yPos;
 
+String[] months;
+String[] days;
+String[] years;
+String[] titles;
+String[] descriptions;
+
 void setup() {
   fullScreen();
  
@@ -35,12 +41,10 @@ void setup() {
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i] = new Tile(xPos, yPos);
   }
-  println("\n" + tiles.length);
   determine_xPositionsOfTilesBasedOnNumberOfTile();  
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i].drawTile();
   }
-       
 }
 
 void draw() {
@@ -66,7 +70,10 @@ void labelUserInputtedLines() {
 void splitUserInputtedDate() {
   for (int i = 0; i < calendarText.length/3; i++) {
     dateSplitIntoComponents = splitTokens(userDefinedDates[i], "/-, ");
-    println(dateSplitIntoComponents); 
+    
+    months = split(dateSplitIntoComponents[0], "/n");  
+    days = split(dateSplitIntoComponents[1], "/n");
+    years = split(dateSplitIntoComponents[2], "/n");
   }
 }
 
