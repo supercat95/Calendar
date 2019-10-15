@@ -4,7 +4,7 @@ class Tile {
   float yPosOfTile;
   
   //--------------------------------------------------
-  Tile() {
+  Tile(float xPos) {
     dimensionsOfTile = width/3;
     //xPosOfTile = width/2;
     yPosOfTile = height/2;

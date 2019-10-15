@@ -5,6 +5,7 @@
 */
 
 String instructions = "You're going to make a custom calendar!\nOpen the text file called 'Text File'\nAdd a DATE (written in any standard US format), a TITLE for the event, and a DESCRIPTION, in that order, all on separate lines.\nYou can do this up to 4 times. Do not leave blank lines.\nSave the file, then Run Processing again.\n";
+
 String[] calendarText;
 String[] userDefinedDates;
 String[] userDefinedTitles;
@@ -13,6 +14,7 @@ String[] userDefinedDescriptions;
 String[] dateSplitIntoComponents;
 
 Tile[] tiles;
+float xPos;
 
 void setup() {
   fullScreen();
@@ -30,7 +32,7 @@ void setup() {
   // creates the tiles
   tiles = new Tile[calendarText.length/3];
   for (int i = 0; i < calendarText.length/3; i++) {
-    tiles[i] = new Tile();
+    tiles[i] = new Tile(xPos);
   }
   determine_xPositionsOfTilesBasedOnNumberOfTile();  
   for (int i = 0; i < calendarText.length/3; i++) {
@@ -41,7 +43,7 @@ void setup() {
 
 void draw() {
   fill(0,0,0);
-  rect(0,0,50,50);
+  rect(0,0,70,70);
   textSize(10);
   fill(255,255,255);
   text(pmouseX,10,10);

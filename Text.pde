@@ -9,7 +9,9 @@ class Text extends Tile {
   float xPosOfDescriptionText;
   float yPosOfDescriptionText;
   
-  Text() {}
+  Text() {
+    super(xPos);
+}
   
   
 } // end of Text subclass
