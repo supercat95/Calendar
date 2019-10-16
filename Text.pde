@@ -5,50 +5,28 @@ class Text extends Tile {
   String[] eventTitles;
   String[] eventDescriptions;
   
-  // front side
-  float xPosOfTitleText;
-  float yPosOfTitleText;
-  float xPosOfDateText;
-  float yPosOfDateText;
+  float xPosOfText;
+  float yPosOfText;
   
-  // back side
-  float xPosOfDescriptionText;
-  float yPosOfDescriptionText;
+  //==================================================
+  Text() {
+    this.xPosOfText = super.xPosOfTile;
+    this.yPosOfText = super.yPosOfTile;
+  }
   
-  //--------------------------------------------------
   Text(String[] months, String[] days, String[] years, String[] titles, String[] descriptions) {
-    super(xPos, yPos);
-    set_eventMonth();
-    set_eventDay();
-    set_eventYear();
-    set_eventTitle();
-    set_eventDescription();
+    super(xPosOfTiles, yPosOfTiles); // not sure if this is needed
+    this.eventMonths = months;
+    this.eventDays = days;
+    this.eventYears = years;
+    this.eventTitles = titles;
+    this.eventDescriptions = descriptions;
   }
   
-  //--------------------------------------------------
-  void set_eventMonth() {
-    eventMonths = months;
+  //==================================================
+  void drawText() {
+    fill(125,125,125);
+    text("This is a test", xPosOfText, yPosOfText);
   }
-  
-  //--------------------------------------------------
-  void set_eventDay() {
-    eventDays = days;
-  }
-  
-  //--------------------------------------------------
-  void set_eventYear() {
-    eventYears = years;
-  }
-  
-  //--------------------------------------------------
-  void set_eventTitle() {
-    eventTitles = titles;
-  }
-  
-  //--------------------------------------------------
-  void set_eventDescription() {
-    eventDescriptions = descriptions;
-  }
-  
   
 } // end of Text subclass

@@ -3,14 +3,20 @@ class Tile {
   float xPosOfTile;
   float yPosOfTile;
   
-  //--------------------------------------------------
+  //==================================================
+  Tile() { // unused default constructor with meaningless variables
+    this.dimensionsOfTile = 0;
+    this.xPosOfTile = 0;
+    this.yPosOfTile = 0;
+  }
+  
   Tile(float xPos, float yPos) {
-    setDimensionsOfTile();
-    xPosOfTile = xPos;  
-    yPosOfTile = yPos;
+    this.setDimensionsOfTile();
+    this.xPosOfTile = xPos;  
+    this.yPosOfTile = yPos;
   }
  
-  //--------------------------------------------------
+  //==================================================
   void setDimensionsOfTile() {
     dimensionsOfTile = width/3;
     if (tiles.length >= 3) {
@@ -21,21 +27,6 @@ class Tile {
   float getDimensionsOfTile() {
     return dimensionsOfTile;
   }
-  //--------------------------------------------------
-  void set_xPositioningOfTile() {}
-  
-  float get_xPositioningOfTile() {
-    return xPosOfTile;
-  }
-  
-  //--------------------------------------------------
-  void set_yPositioningOfTile() {
-    
-  }
-  
-  float get_yPositioningOfTile() {
-    return yPosOfTile;
-  }
   
   //--------------------------------------------------
   void drawTile() {
@@ -43,10 +34,12 @@ class Tile {
     stroke(0,0,0);
     strokeWeight(4);
     rectMode(CENTER);
-    rect(get_xPositioningOfTile(), get_yPositioningOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
+    rect(xPosOfTile, yPosOfTile, getDimensionsOfTile(), getDimensionsOfTile());
   }
   
-  void tileFlipsWhenClickedOn() {}
+  void tileFlipsWhenClickedOn() {
+    rotateZ(PI);
+  }
   
   
 } // end of Tile class

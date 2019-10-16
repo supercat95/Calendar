@@ -14,8 +14,8 @@ String[] userDefinedDescriptions;
 String[] dateSplitIntoComponents;
 
 Tile[] tiles;
-float xPos;
-float yPos;
+float xPosOfTiles;
+float yPosOfTiles;
 
 String[] months;
 String[] days;
@@ -23,8 +23,12 @@ String[] years;
 String[] titles;
 String[] descriptions;
 
+Text[] text; // hard coding as a test
+float xPosOfText;
+float yPosOfText;
+
 void setup() {
-  fullScreen();
+  fullScreen(P3D);
  
   // initializes and organizes variables based on user inputted data
   calendarText = loadStrings("Text File.txt");
@@ -36,15 +40,14 @@ void setup() {
   labelUserInputtedLines();
   splitUserInputtedDate();
   
-  // creates the tiles
-  tiles = new Tile[calendarText.length/3];
+  createTheTiles();
+  
   for (int i = 0; i < calendarText.length/3; i++) {
-    tiles[i] = new Tile(xPos, yPos);
+    text[i] = new Text();
+    text[i].drawText();
   }
-  determine_xPositionsOfTilesBasedOnNumberOfTile();  
-  for (int i = 0; i < calendarText.length/3; i++) {
-    tiles[i].drawTile();
-  }
+  
+ 
 }
 
 void draw() {
@@ -54,6 +57,7 @@ void draw() {
   fill(255,255,255);
   text(pmouseX,10,10);
   text(pmouseY,10,30);
+  
 }
 
 // ----------------------------------------------------------------------------
@@ -115,4 +119,22 @@ void determine_xPositionsOfTilesBasedOnNumberOfTile() {
         text(instructions, width/2, 2*height/5);
         break;
     }
+}
+
+void createTheTiles() {
+  tiles = new Tile[calendarText.length/3];
+  for (int i = 0; i < calendarText.length/3; i++) {
+    tiles[i] = new Tile(xPosOfTiles, yPosOfTiles);
+  }
+  determine_xPositionsOfTilesBasedOnNumberOfTile();  
+  for (int i = 0; i < calendarText.length/3; i++) {
+    tiles[i].drawTile();
+  }
+}
+
+void mousePressed() {
+  for (int i = 0; i < calendarText.length/3; i++) {
+    tiles[i].tileFlipsWhenClickedOn();
+    // line for text
+  }
 }
