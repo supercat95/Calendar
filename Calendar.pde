@@ -16,6 +16,7 @@ String[] dateSplitIntoComponents;
 Tile[] tiles;
 float xPosOfTiles;
 float yPosOfTiles;
+float dimensionsOfTiles;
 
 String[] months;
 String[] days;
@@ -23,9 +24,9 @@ String[] years;
 String[] titles;
 String[] descriptions;
 
-Text[] text; // hard coding as a test
-float xPosOfText;
-float yPosOfText;
+//Text[] text; 
+//float xPosOfText;
+//float yPosOfText;
 
 void setup() {
   fullScreen(P3D);
@@ -40,14 +41,10 @@ void setup() {
   labelUserInputtedLines();
   splitUserInputtedDate();
   
-  createTheTiles();
+  createAndDrawTheTiles();
+  createTextObjects();
+  drawTheText();
   
-  for (int i = 0; i < calendarText.length/3; i++) {
-    text[i] = new Text();
-    text[i].drawText();
-  }
-  
- 
 }
 
 void draw() {
@@ -82,7 +79,7 @@ void splitUserInputtedDate() {
 }
 
 // ----------------------------------------------------------------------------
-void determine_xPositionsOfTilesBasedOnNumberOfTile() {
+void determinePositionsOfTilesBasedOnNumberOfTiles() {
   switch(tiles.length) {
       case 1:
         tiles[0].xPosOfTile = width/2;
@@ -121,20 +118,46 @@ void determine_xPositionsOfTilesBasedOnNumberOfTile() {
     }
 }
 
-void createTheTiles() {
+// ----------------------------------------------------------------------------
+void createAndDrawTheTiles() {
   tiles = new Tile[calendarText.length/3];
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i] = new Tile(xPosOfTiles, yPosOfTiles);
   }
-  determine_xPositionsOfTilesBasedOnNumberOfTile();  
+  determinePositionsOfTilesBasedOnNumberOfTiles();  
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i].drawTile();
   }
 }
 
+// ----------------------------------------------------------------------------
+void createTextObjects() {
+  for (int i = 0; i < tiles.length; i ++) {
+    tiles[i].createSubclassTextObjects();
+  }
+}
+
+void drawTheText() {
+   fill(125,125,125);
+   textAlign(CENTER);
+   tiles.text.passInVariablesNeededForText(months, days, years, titles, descriptions);
+   for (int i = 0; i < calendarText.length/3; i++) {
+     tiles[i].text[i].drawMonth();
+     //tiles[i].text[i].drawDay();
+     //tiles[i].text[i].drawYear();
+     //tiles[i].text[i].drawTitle();
+     //tiles[i].text[i].drawDescription();
+   }
+}
+
+// ----------------------------------------------------------------------------
 void mousePressed() {
   for (int i = 0; i < calendarText.length/3; i++) {
-    tiles[i].tileFlipsWhenClickedOn();
-    // line for text
+    if (pmouseX >= tiles[i].xPosOfTile - tiles[i].dimensionsOfTile/2 && pmouseX <= tiles[i].xPosOfTile + tiles[i].dimensionsOfTile/2) {
+      if (pmouseY >= tiles[i].xPosOfTile - tiles[i].dimensionsOfTile/2 && pmouseY <= tiles[i].yPosOfTile + tiles[i].dimensionsOfTile/2) {
+        tiles[i].tileFlipsWhenClickedOn();
+        tiles[i].text[i].textFlipsWhenClickedOn();
+      }
+    }
   }
 }

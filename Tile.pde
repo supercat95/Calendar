@@ -3,15 +3,12 @@ class Tile {
   float xPosOfTile;
   float yPosOfTile;
   
-  //==================================================
-  Tile() { // unused default constructor with meaningless variables
-    this.dimensionsOfTile = 0;
-    this.xPosOfTile = 0;
-    this.yPosOfTile = 0;
-  }
+  Text[] text = new Text[calendarText.length/3];
   
-  Tile(float xPos, float yPos) {
-    this.setDimensionsOfTile();
+  //==================================================
+  Tile(float xPos, float yPos) {;imensionsOfTile();
+    this.xPosOfTile = xPos; 
+  this.setDimensionsOfTile();
     this.xPosOfTile = xPos;  
     this.yPosOfTile = yPos;
   }
@@ -29,6 +26,16 @@ class Tile {
   }
   
   //--------------------------------------------------
+  float get_xPosOfTile() {
+    return xPosOfTile;
+  }
+  
+  //--------------------------------------------------
+  float get_yPosOfTile() {
+    return yPosOfTile;
+  }
+  
+  //--------------------------------------------------
   void drawTile() {
     fill(255,255,255);
     stroke(0,0,0);
@@ -39,7 +46,15 @@ class Tile {
   
   void tileFlipsWhenClickedOn() {
     rotateZ(PI);
+    this.drawTile();
+    //this.text[].drawText(get_xPosOfTile(), get_yPosOfTile());
   }
   
+  //--------------------------------------------------
+  void createSubclassTextObjects() {
+    for (int i = 0; i < calendarText.length/3; i++) {
+      text[i] = new Text(get_xPosOfTile(), get_yPosOfTile());
+    }
+  }
   
 } // end of Tile class

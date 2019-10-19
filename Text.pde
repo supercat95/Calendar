@@ -9,13 +9,17 @@ class Text extends Tile {
   float yPosOfText;
   
   //==================================================
-  Text() {
+  Text(float xPos, float yPos) {
+    super(xPos, yPos);
     this.xPosOfText = super.xPosOfTile;
     this.yPosOfText = super.yPosOfTile;
   }
   
-  Text(String[] months, String[] days, String[] years, String[] titles, String[] descriptions) {
-    super(xPosOfTiles, yPosOfTiles); // not sure if this is needed
+  Text(float xPos, float yPos, String[] months, String[] days, String[] years, String[] titles, String[] descriptions) {
+    super(xPosOfTiles, yPosOfTiles);
+    this.xPosOfText = super.xPosOfTile;
+    this.yPosOfText = super.yPosOfTile;
+    
     this.eventMonths = months;
     this.eventDays = days;
     this.eventYears = years;
@@ -24,9 +28,25 @@ class Text extends Tile {
   }
   
   //==================================================
-  void drawText() {
-    fill(125,125,125);
-    text("This is a test", xPosOfText, yPosOfText);
+  void passInVariablesNeededForText(String[] months, String[] days, String[] years, String[] titles, String[] descriptions) {
+    this.eventMonths = months;
+    this.eventDays = days;
+    this.eventYears = years;
+    this.eventTitles = titles;
+    this.eventDescriptions = descriptions;
+  }
+  
+  void drawMonth() {
+    //text("This is a test", xPosOfText, yPosOfText);
+    for (int i = 0; i < calendarText.length/3; i++ ) {
+      //text(
+    }
+  }
+  
+  //--------------------------------------------------
+   void textFlipsWhenClickedOn() {
+    rotateZ(PI);
+    this.drawText();
   }
   
 } // end of Text subclass
