@@ -24,9 +24,8 @@ String[] years;
 String[] titles;
 String[] descriptions;
 
-//Text[] text; 
-//float xPosOfText;
-//float yPosOfText;
+String[] dateText;
+String[] textForFrontOfTile;
 
 void setup() {
   fullScreen(P3D);
@@ -38,6 +37,13 @@ void setup() {
   userDefinedTitles = new String[calendarText.length/3];
   userDefinedDescriptions = new String[calendarText.length/3];
   
+  months = new String[calendarText.length/3];
+  days = new String[calendarText.length/3];
+  years = new String[calendarText.length/3];
+  
+  dateText = new String[calendarText.length/3];
+  textForFrontOfTile = new String[calendarText.length/3];
+  
   labelUserInputtedLines();
   splitUserInputtedDate();
   
@@ -47,15 +53,7 @@ void setup() {
   
 }
 
-void draw() {
-  fill(0,0,0);
-  rect(0,0,70,70);
-  textSize(10);
-  fill(255,255,255);
-  text(pmouseX,10,10);
-  text(pmouseY,10,30);
-  
-}
+void draw() {}
 
 // ----------------------------------------------------------------------------
 void labelUserInputtedLines() {
@@ -72,9 +70,12 @@ void splitUserInputtedDate() {
   for (int i = 0; i < calendarText.length/3; i++) {
     dateSplitIntoComponents = splitTokens(userDefinedDates[i], "/-, ");
     
-    months = split(dateSplitIntoComponents[0], "/n");  
+    months = split(dateSplitIntoComponents[0], "/n"); 
+    printArray(months);
     days = split(dateSplitIntoComponents[1], "/n");
     years = split(dateSplitIntoComponents[2], "/n");
+    
+    dateText[i] = userDefinedTitles[i] + months + days + years;
   }
 }
 
@@ -140,13 +141,14 @@ void createTextObjects() {
 void drawTheText() {
    fill(125,125,125);
    textAlign(CENTER);
-   for (int i = 0; i < calendarText.length/3; i++) {
-     tiles[i].text[i].drawMonth(months);
-     //tiles[i].text[i].drawDay();
-     //tiles[i].text[i].drawYear();
-     //tiles[i].text[i].drawTitle();
-     //tiles[i].text[i].drawDescription();
-   }
+   textLeading(tiles[0].getDimensionsOfTile() / 8.0);
+   //textSize(tiles[0].getDimensionsOfTile() / 6.0);
+  
+     tiles[0].text[0].drawText(dateText[0]);
+   
+   //for (int i = 0; i < calendarText.length/3; i++) {
+   //  tiles[i].text[i].drawText(dateText[i]);
+   //}
 }
 
 // ----------------------------------------------------------------------------

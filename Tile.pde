@@ -6,8 +6,7 @@ class Tile {
   Text[] text = new Text[calendarText.length/3];
   
   //==================================================
-  Tile(float xPos, float yPos) {;imensionsOfTile();
-    this.xPosOfTile = xPos; 
+  Tile(float xPos, float yPos) {
     this.setDimensionsOfTile();
     this.xPosOfTile = xPos;  
     this.yPosOfTile = yPos;
