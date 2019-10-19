@@ -8,7 +8,7 @@ class Tile {
   //==================================================
   Tile(float xPos, float yPos) {;imensionsOfTile();
     this.xPosOfTile = xPos; 
-  this.setDimensionsOfTile();
+    this.setDimensionsOfTile();
     this.xPosOfTile = xPos;  
     this.yPosOfTile = yPos;
   }

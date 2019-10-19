@@ -1,4 +1,7 @@
 class Text extends Tile {
+  // inherited from Tile:
+  // float dimensionsOfTile;
+  
   String[] eventMonths;
   String[] eventDays;
   String[] eventYears;
@@ -36,17 +39,18 @@ class Text extends Tile {
     this.eventDescriptions = descriptions;
   }
   
-  void drawMonth() {
+  void drawMonth(String[] months) {
     //text("This is a test", xPosOfText, yPosOfText);
+    eventMonths = months;
     for (int i = 0; i < calendarText.length/3; i++ ) {
-      //text(
+      text(eventMonths[i], xPosOfText, yPosOfText - (1/4 * super.dimensionsOfTile));
     }
   }
   
   //--------------------------------------------------
    void textFlipsWhenClickedOn() {
     rotateZ(PI);
-    this.drawText();
+    this.drawMonth(months);
   }
   
 } // end of Text subclass

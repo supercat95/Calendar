@@ -140,9 +140,8 @@ void createTextObjects() {
 void drawTheText() {
    fill(125,125,125);
    textAlign(CENTER);
-   tiles.text.passInVariablesNeededForText(months, days, years, titles, descriptions);
    for (int i = 0; i < calendarText.length/3; i++) {
-     tiles[i].text[i].drawMonth();
+     tiles[i].text[i].drawMonth(months);
      //tiles[i].text[i].drawDay();
      //tiles[i].text[i].drawYear();
      //tiles[i].text[i].drawTitle();
