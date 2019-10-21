@@ -45,7 +45,7 @@ class Text extends Tile {
   void drawText(String dateText) {
     //text("This is a test", xPosOfText, yPosOfText);
     eventText = dateText;
-    text(eventText, xPosOfText, yPosOfText - (super.dimensionsOfTile / 2.0));
+    text(eventText, xPosOfText, yPosOfText - (super.dimensionsOfTile/ 4.0));
   }
   
   //--------------------------------------------------

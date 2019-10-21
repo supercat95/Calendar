@@ -70,13 +70,13 @@ void splitUserInputtedDate() {
   for (int i = 0; i < calendarText.length/3; i++) {
     dateSplitIntoComponents = splitTokens(userDefinedDates[i], "/-, ");
     
-    months = split(dateSplitIntoComponents[0], "/n"); 
-    printArray(months);
-    days = split(dateSplitIntoComponents[1], "/n");
-    years = split(dateSplitIntoComponents[2], "/n");
-    
-    dateText[i] = userDefinedTitles[i] + months + days + years;
+    months[i] = dateSplitIntoComponents[0]; 
+    days[i] = dateSplitIntoComponents[1];
+    years[i] = dateSplitIntoComponents[2];
+
+    dateText[i] = userDefinedTitles[i] + "\n" + months[i] + "\n" + days[i] + "\n" + years[i]; 
   }
+     
 }
 
 // ----------------------------------------------------------------------------
@@ -142,13 +142,11 @@ void drawTheText() {
    fill(125,125,125);
    textAlign(CENTER);
    textLeading(tiles[0].getDimensionsOfTile() / 8.0);
-   //textSize(tiles[0].getDimensionsOfTile() / 6.0);
-  
-     tiles[0].text[0].drawText(dateText[0]);
+   textSize(tiles[0].getDimensionsOfTile() / 6.0);
    
-   //for (int i = 0; i < calendarText.length/3; i++) {
-   //  tiles[i].text[i].drawText(dateText[i]);
-   //}
+   for (int i = 0; i < calendarText.length/3; i++) {
+     tiles[i].text[i].drawText(dateText[i]);
+   }
 }
 
 // ----------------------------------------------------------------------------
