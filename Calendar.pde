@@ -29,6 +29,7 @@ String[] textForFrontOfTile;
 
 void setup() {
   fullScreen(P3D);
+  //frameRate(60);
  
   // initializes and organizes variables based on user inputted data
   calendarText = loadStrings("Text File.txt");
@@ -49,11 +50,12 @@ void setup() {
   
   createAndDrawTheTiles();
   createTextObjects();
-  drawTheText();
   
 }
 
-void draw() {}
+void draw() {
+  drawTheText();
+}
 
 // ----------------------------------------------------------------------------
 void labelUserInputtedLines() {
@@ -61,9 +63,7 @@ void labelUserInputtedLines() {
     userDefinedDates[i] = calendarText[i*3];
     userDefinedTitles[i] = calendarText[i*3+1];
     userDefinedDescriptions[i] = calendarText[i*3+2];   
-    println(userDefinedDates[i], userDefinedTitles[i], userDefinedDescriptions[i]); // this works
   }
-  println("\n");
 }
 
 void splitUserInputtedDate() {
@@ -75,8 +75,7 @@ void splitUserInputtedDate() {
     years[i] = dateSplitIntoComponents[2];
 
     dateText[i] = userDefinedTitles[i] + "\n" + months[i] + "\n" + days[i] + "\n" + years[i]; 
-  }
-     
+  }     
 }
 
 // ----------------------------------------------------------------------------
@@ -141,22 +140,23 @@ void createTextObjects() {
 void drawTheText() {
    fill(125,125,125);
    textAlign(CENTER);
-   textLeading(tiles[0].getDimensionsOfTile() / 8.0);
+   textLeading(tiles[0].getDimensionsOfTile() / 10.0);
    textSize(tiles[0].getDimensionsOfTile() / 6.0);
    
    for (int i = 0; i < calendarText.length/3; i++) {
-     tiles[i].text[i].drawText(dateText[i]);
+     tiles[i].text[i].drawFrontSideText(dateText[i]);
    }
 }
 
 // ----------------------------------------------------------------------------
-void mousePressed() {
+void mouseClicked() {
   for (int i = 0; i < calendarText.length/3; i++) {
-    if (pmouseX >= tiles[i].xPosOfTile - tiles[i].dimensionsOfTile/2 && pmouseX <= tiles[i].xPosOfTile + tiles[i].dimensionsOfTile/2) {
-      if (pmouseY >= tiles[i].xPosOfTile - tiles[i].dimensionsOfTile/2 && pmouseY <= tiles[i].yPosOfTile + tiles[i].dimensionsOfTile/2) {
+    if (mouseX >= tiles[i].xPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseX <= tiles[i].xPosOfTile + (tiles[0].dimensionsOfTile / 2.0)
+      && mouseY >= tiles[i].yPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseY <= tiles[i].yPosOfTile + (tiles[0].dimensionsOfTile / 2.0)) {
         tiles[i].tileFlipsWhenClickedOn();
-        tiles[i].text[i].textFlipsWhenClickedOn();
-      }
+        //tiles[i].text[i].textFlipsWhenClickedOn(userDefinedDescriptions[i]);
+        //fill(random(0,255),random(0,255),random(0,255));
+        //text("I got clicked on", width/2, height/2);
     }
   }
 }

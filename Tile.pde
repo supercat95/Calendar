@@ -3,6 +3,8 @@ class Tile {
   float xPosOfTile;
   float yPosOfTile;
   
+  int rotation = 0;
+  
   Text[] text = new Text[calendarText.length/3];
   
   //==================================================
@@ -40,12 +42,18 @@ class Tile {
     stroke(0,0,0);
     strokeWeight(4);
     rectMode(CENTER);
-    rect(xPosOfTile, yPosOfTile, getDimensionsOfTile(), getDimensionsOfTile());
+    rect(get_xPosOfTile(), get_yPosOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
   }
   
   void tileFlipsWhenClickedOn() {
-    rotateZ(PI);
-    this.drawTile();
+    while (rotation < 180) {
+      pushMatrix();
+        translate(get_xPosOfTile(), get_yPosOfTile() - (getDimensionsOfTile() / 1.25), 0 - getDimensionsOfTile());
+        rotateY(rotation);
+        this.drawTile();
+      rotation++;
+      popMatrix();
+    }
     //this.text[].drawText(get_xPosOfTile(), get_yPosOfTile());
   }
   

@@ -3,13 +3,15 @@ class Text extends Tile {
   // float dimensionsOfTile;
   
   String eventText;
+  String descriptionText;
   
   String[] eventMonths;
-  String eventMonth;
+  String eventDate;
   String[] eventDays;
   String[] eventYears;
   String[] eventTitles;
   String[] eventDescriptions;
+  String eventDescription;
   
   float xPosOfText;
   float yPosOfText;
@@ -42,16 +44,19 @@ class Text extends Tile {
     this.eventDescriptions = descriptions;
   }
   
-  void drawText(String dateText) {
-    //text("This is a test", xPosOfText, yPosOfText);
+  void drawFrontSideText(String dateText) {
     eventText = dateText;
-    text(eventText, xPosOfText, yPosOfText - (super.dimensionsOfTile/ 4.0));
+    text(eventText, xPosOfText, yPosOfText - (super.dimensionsOfTile/ 3.25));
+  }
+  
+  void drawBackSideText(String eventDescription) {
+    descriptionText = eventDescription;
+    text(descriptionText, xPosOfText, yPosOfText);
   }
   
   //--------------------------------------------------
-   void textFlipsWhenClickedOn() {
-    rotateZ(PI);
-    this.drawText(eventMonth);
+   void textFlipsWhenClickedOn(String eventDescription) {
+    this.drawBackSideText(eventDescription);
   }
   
 } // end of Text subclass
