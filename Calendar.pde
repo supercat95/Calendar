@@ -27,8 +27,6 @@ String[] descriptions;
 String[] dateText;
 String[] textForFrontOfTile;
 
-float rotation = 0.0;
-
 void setup() {
   fullScreen(P3D);
   //frameRate(1);
@@ -50,14 +48,15 @@ void setup() {
   labelUserInputtedLines();
   splitUserInputtedDate();
   
-  createAndDrawTheTiles();
+  createTileObjects();
+  drawTheTiles();
+  
   createTextObjects();
+  drawTheText();
   
 }
 
-void draw() {
-  drawTheText();
-}
+void draw() {}  
 
 // ----------------------------------------------------------------------------
 void labelUserInputtedLines() {
@@ -121,11 +120,14 @@ void determinePositionsOfTilesBasedOnNumberOfTiles() {
 }
 
 // ----------------------------------------------------------------------------
-void createAndDrawTheTiles() {
+void createTileObjects() {
   tiles = new Tile[calendarText.length/3];
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i] = new Tile(xPosOfTiles, yPosOfTiles);
   }
+}
+
+void drawTheTiles() {
   determinePositionsOfTilesBasedOnNumberOfTiles();  
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i].drawTile();

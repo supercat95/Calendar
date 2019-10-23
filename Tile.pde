@@ -44,7 +44,7 @@ class Tile {
     stroke(0,0,0);
     strokeWeight(4);
     rectMode(CENTER);
-    rect(get_xPosOfTile(), get_yPosOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
+    rect(this.get_xPosOfTile(), this.get_yPosOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
   }
   
   void tileFlipsWhenClickedOn(float rotation) {
