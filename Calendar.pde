@@ -52,7 +52,9 @@ void setup() {
   drawTheTiles();
   
   createTextObjects();
-  drawTheText();
+  if (tiles.length != 0) {
+    drawTheText();
+  }
   
 }
 
