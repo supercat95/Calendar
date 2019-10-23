@@ -27,9 +27,11 @@ String[] descriptions;
 String[] dateText;
 String[] textForFrontOfTile;
 
+float rotation = 0.0;
+
 void setup() {
   fullScreen(P3D);
-  //frameRate(60);
+  //frameRate(1);
  
   // initializes and organizes variables based on user inputted data
   calendarText = loadStrings("Text File.txt");
@@ -150,13 +152,13 @@ void drawTheText() {
 
 // ----------------------------------------------------------------------------
 void mouseClicked() {
-  for (int i = 0; i < calendarText.length/3; i++) {
+ for (int i = 0; i < calendarText.length/3; i++) {
     if (mouseX >= tiles[i].xPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseX <= tiles[i].xPosOfTile + (tiles[0].dimensionsOfTile / 2.0)
       && mouseY >= tiles[i].yPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseY <= tiles[i].yPosOfTile + (tiles[0].dimensionsOfTile / 2.0)) {
-        tiles[i].tileFlipsWhenClickedOn();
+        for (float rotation  = 0.0; rotation < 3.14; rotation += .1) {
+          tiles[i].tileFlipsWhenClickedOn(rotation);
         //tiles[i].text[i].textFlipsWhenClickedOn(userDefinedDescriptions[i]);
-        //fill(random(0,255),random(0,255),random(0,255));
-        //text("I got clicked on", width/2, height/2);
+        }
     }
   }
 }

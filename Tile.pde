@@ -3,15 +3,17 @@ class Tile {
   float xPosOfTile;
   float yPosOfTile;
   
-  int rotation = 0;
+  float rotate;
+  float yPos;
   
   Text[] text = new Text[calendarText.length/3];
   
   //==================================================
   Tile(float xPos, float yPos) {
-    this.setDimensionsOfTile();
+    setDimensionsOfTile();
     this.xPosOfTile = xPos;  
     this.yPosOfTile = yPos;
+    rotate = 0.0;
   }
  
   //==================================================
@@ -45,16 +47,14 @@ class Tile {
     rect(get_xPosOfTile(), get_yPosOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
   }
   
-  void tileFlipsWhenClickedOn() {
-    while (rotation < 180) {
-      pushMatrix();
-        translate(get_xPosOfTile(), get_yPosOfTile() - (getDimensionsOfTile() / 1.25), 0 - getDimensionsOfTile());
-        rotateY(rotation);
-        this.drawTile();
-      rotation++;
-      popMatrix();
-    }
-    //this.text[].drawText(get_xPosOfTile(), get_yPosOfTile());
+  void tileFlipsWhenClickedOn(float rotation) {
+    rotate = rotation;    
+    pushMatrix();
+      translate(this.get_xPosOfTile(), this.get_yPosOfTile() - (getDimensionsOfTile() / 1.25), 0 - getDimensionsOfTile() - sin(rotate) * 270);
+      rotateY(rotate *= -1);
+          this.drawTile();   
+        //this.text[].drawBackSideText(get_xPosOfTile(), get_yPosOfTile());
+    popMatrix();
   }
   
   //--------------------------------------------------
