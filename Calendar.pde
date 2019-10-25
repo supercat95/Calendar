@@ -27,9 +27,11 @@ String[] descriptions;
 String[] dateText;
 String[] textForFrontOfTile;
 
+int rotation = 0;
+
 void setup() {
   fullScreen(P3D);
-  //frameRate(1);
+  frameRate(10);
  
   // initializes and organizes variables based on user inputted data
   calendarText = loadStrings("Text File.txt");
@@ -49,16 +51,33 @@ void setup() {
   splitUserInputtedDate();
   
   createTileObjects();
+  determinePositionsOfTilesBasedOnNumberOfTiles(); 
   drawTheTiles();
   
   createTextObjects();
-  if (tiles.length != 0) {
-    drawTheText();
-  }
   
 }
 
-void draw() {}  
+void draw() {
+  background(125,125,125);
+  for (int i = 0; i < calendarText.length/3; i ++) {
+    if (tiles[i].tileShouldRotate) {
+      rectMode(CORNER);
+      tiles[i].tileFlipsWhenClickedOn();
+      if (tiles[i].rotate <= -2.5 && tiles[i].rotate >= -2.6) {
+        tiles[i].tileIsClickedOn();
+      }
+    }
+    else {
+      rectMode(CENTER);
+      tiles[i].drawTile();
+    }
+  }
+  
+  if (tiles.length != 0) {
+    drawTheText();
+  }
+}  
 
 // ----------------------------------------------------------------------------
 void labelUserInputtedLines() {
@@ -129,8 +148,7 @@ void createTileObjects() {
   }
 }
 
-void drawTheTiles() {
-  determinePositionsOfTilesBasedOnNumberOfTiles();  
+void drawTheTiles() { 
   for (int i = 0; i < calendarText.length/3; i++) {
     tiles[i].drawTile();
   }
@@ -155,14 +173,15 @@ void drawTheText() {
 }
 
 // ----------------------------------------------------------------------------
-void mouseClicked() {
+void mousePressed() {
  for (int i = 0; i < calendarText.length/3; i++) {
     if (mouseX >= tiles[i].xPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseX <= tiles[i].xPosOfTile + (tiles[0].dimensionsOfTile / 2.0)
       && mouseY >= tiles[i].yPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseY <= tiles[i].yPosOfTile + (tiles[0].dimensionsOfTile / 2.0)) {
-        for (float rotation  = 0.0; rotation < 3.14; rotation += .1) {
-          tiles[i].tileFlipsWhenClickedOn(rotation);
+        //for (float rotation  = 0.0; rotation < 3.14; rotation += .1) {
+          tiles[i].tileIsClickedOn();
+          //tiles[i].tileFlipsWhenClickedOn(rotation);
         //tiles[i].text[i].textFlipsWhenClickedOn(userDefinedDescriptions[i]);
-        }
+        //}
     }
   }
 }

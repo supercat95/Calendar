@@ -4,7 +4,6 @@ class Tile {
   float yPosOfTile;
   
   boolean tileShouldRotate;
-  float rotationIncrement;
   float rotate;
   //float yPos;
   
@@ -16,7 +15,6 @@ class Tile {
     this.xPosOfTile = xPos;  
     this.yPosOfTile = yPos;
     tileShouldRotate = false;
-    rotationIncrement = 0.0;
     rotate = 0.0;
   }
  
@@ -48,22 +46,19 @@ class Tile {
     stroke(0,0,0);
     strokeWeight(4);
     rect(this.get_xPosOfTile(), this.get_yPosOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
-}
-  
-  void tileIsClickedOn() {
-    this.tileShouldRotate = !tileShouldRotate;
-    this.rotationIncrement = 0.1;
   }
   
-  void tileFlipsWhenClickedOn() {
+  void tileIsclickedOn() {
+    this.tileShouldRotate = true;
+  }
+  void tileFlipsWhenClickedOn(float rotation) {
+    rotate = rotation;    
     pushMatrix();
-      translate(0, 0 - (getDimensionsOfTile() / 1.25), 0 - (getDimensionsOfTile() * 2) - sin(rotate) * 270);
-      rotateY(rotate);
+      translate(this.get_xPosOfTile(), this.get_yPosOfTile() - (getDimensionsOfTile() / 1.25), 0 - getDimensionsOfTile() - sin(rotate) * 270);
+      rotateY(rotate *= -1);
           this.drawTile();   
         //this.text[].drawBackSideText(get_xPosOfTile(), get_yPosOfTile());
     popMatrix();
-    rotate -= rotationIncrement;
-    println(rotate);
   }
   
   //--------------------------------------------------
