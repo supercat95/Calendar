@@ -6,7 +6,6 @@ class Tile {
   boolean tileShouldRotate;
   float rotationIncrement;
   float rotate;
-  //float yPos;
   
   Text[] text = new Text[calendarText.length/3];
   
@@ -47,7 +46,7 @@ class Tile {
     fill(255,255,255);
     stroke(0,0,0);
     strokeWeight(4);
-    rect(this.get_xPosOfTile(), this.get_yPosOfTile(), getDimensionsOfTile(), getDimensionsOfTile());
+    rect(0, 0, getDimensionsOfTile(), getDimensionsOfTile());
 }
   
   void tileIsClickedOn() {
@@ -57,7 +56,7 @@ class Tile {
   
   void tileFlipsWhenClickedOn() {
     pushMatrix();
-      translate(0, 0 - (getDimensionsOfTile() / 1.25), 0 - (getDimensionsOfTile() * 2) - sin(rotate) * 270);
+      translate(this.get_xPosOfTile(), this.get_yPosOfTile() - (getDimensionsOfTile() / 1.25), 0 - (getDimensionsOfTile() * 2));
       rotateY(rotate);
           this.drawTile();   
         //this.text[].drawBackSideText(get_xPosOfTile(), get_yPosOfTile());

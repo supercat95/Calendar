@@ -64,7 +64,7 @@ void draw() {
     if (tiles[i].tileShouldRotate) {
       rectMode(CORNER);
       tiles[i].tileFlipsWhenClickedOn();
-      if (tiles[i].rotate <= -2.5 && tiles[i].rotate >= -2.6) {
+      if (tiles[i].rotate % 3.199999 == 0) {
         tiles[i].tileIsClickedOn();
       }
     }
