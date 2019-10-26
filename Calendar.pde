@@ -52,7 +52,6 @@ void setup() {
   
   createTileObjects();
   determinePositionsOfTilesBasedOnNumberOfTiles(); 
-  drawTheTiles();
   
   createTextObjects();
   
@@ -60,19 +59,8 @@ void setup() {
 
 void draw() {
   background(125,125,125);
-  for (int i = 0; i < calendarText.length/3; i ++) {
-    if (tiles[i].tileShouldRotate) {
-      rectMode(CORNER);
-      tiles[i].tileFlipsWhenClickedOn();
-      if (tiles[i].rotate % 3.199999 == 0) {
-        tiles[i].tileIsClickedOn();
-      }
-    }
-    else {
-      rectMode(CENTER);
-      tiles[i].drawTile();
-    }
-  }
+  
+  drawTheTiles();
   
   if (tiles.length != 0) {
     drawTheText();
@@ -150,7 +138,16 @@ void createTileObjects() {
 
 void drawTheTiles() { 
   for (int i = 0; i < calendarText.length/3; i++) {
-    tiles[i].drawTile();
+        if (tiles[i].tileShouldRotate) { 
+          tiles[i].tileFlipsWhenClickedOn();
+          if (tiles[i].rotate % -3.199999 == 0) { // stops the rotation animation
+            tiles[i].tileIsClickedOn();
+          }
+        }
+        pushMatrix();
+          translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
+            tiles[i].drawTile();
+        popMatrix();
   }
 }
 
@@ -168,7 +165,11 @@ void drawTheText() {
    textSize(tiles[0].getDimensionsOfTile() / 6.0);
    
    for (int i = 0; i < calendarText.length/3; i++) {
-     tiles[i].text[i].drawFrontSideText(dateText[i]);
+     if (tiles[i].tileShouldRotate == false) {
+       tiles[i].text[i].drawFrontSideText(dateText[i]);
+     } else {
+       tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i]);
+     }
    }
 }
 
@@ -177,11 +178,7 @@ void mousePressed() {
  for (int i = 0; i < calendarText.length/3; i++) {
     if (mouseX >= tiles[i].xPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseX <= tiles[i].xPosOfTile + (tiles[0].dimensionsOfTile / 2.0)
       && mouseY >= tiles[i].yPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseY <= tiles[i].yPosOfTile + (tiles[0].dimensionsOfTile / 2.0)) {
-        //for (float rotation  = 0.0; rotation < 3.14; rotation += .1) {
-          tiles[i].tileIsClickedOn();
-          //tiles[i].tileFlipsWhenClickedOn(rotation);
-        //tiles[i].text[i].textFlipsWhenClickedOn(userDefinedDescriptions[i]);
-        //}
+        tiles[i].tileIsClickedOn();
     }
   }
 }

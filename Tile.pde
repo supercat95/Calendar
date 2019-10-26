@@ -46,6 +46,7 @@ class Tile {
     fill(255,255,255);
     stroke(0,0,0);
     strokeWeight(4);
+    rectMode(CENTER);
     rect(0, 0, getDimensionsOfTile(), getDimensionsOfTile());
 }
   
@@ -56,13 +57,12 @@ class Tile {
   
   void tileFlipsWhenClickedOn() {
     pushMatrix();
-      translate(this.get_xPosOfTile(), this.get_yPosOfTile() - (getDimensionsOfTile() / 1.25), 0 - (getDimensionsOfTile() * 2));
+      translate(this.get_xPosOfTile(), this.get_yPosOfTile(), 0);
       rotateY(rotate);
-          this.drawTile();   
-        //this.text[].drawBackSideText(get_xPosOfTile(), get_yPosOfTile());
+        this.drawTile();   
     popMatrix();
     rotate -= rotationIncrement;
-    println(rotate);
+    println(this.rotate);
   }
   
   //--------------------------------------------------

@@ -54,9 +54,4 @@ class Text extends Tile {
     text(descriptionText, xPosOfText, yPosOfText);
   }
   
-  //--------------------------------------------------
-   void textFlipsWhenClickedOn(String eventDescription) {
-    this.drawBackSideText(eventDescription);
-  }
-  
 } // end of Text subclass
