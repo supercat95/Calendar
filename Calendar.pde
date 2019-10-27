@@ -31,7 +31,7 @@ int rotation = 0;
 
 void setup() {
   fullScreen(P3D);
-  frameRate(10);
+  frameRate(30);
  
   // initializes and organizes variables based on user inputted data
   calendarText = loadStrings("Text File.txt");
@@ -141,13 +141,14 @@ void drawTheTiles() {
         if (tiles[i].tileShouldRotate) { 
           tiles[i].tileFlipsWhenClickedOn();
           if (tiles[i].rotate % -3.199999 == 0) { // stops the rotation animation
-            tiles[i].tileIsClickedOn();
+            tiles[i].tileIsClickedOn(); // sets to false
           }
-        }
+        } else {
         pushMatrix();
           translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
             tiles[i].drawTile();
         popMatrix();
+        }
   }
 }
 
@@ -159,16 +160,24 @@ void createTextObjects() {
 }
 
 void drawTheText() {
-   fill(125,125,125);
+   fill(0,0,0);
    textAlign(CENTER);
    textLeading(tiles[0].getDimensionsOfTile() / 10.0);
    textSize(tiles[0].getDimensionsOfTile() / 6.0);
    
    for (int i = 0; i < calendarText.length/3; i++) {
      if (tiles[i].tileShouldRotate == false) {
-       tiles[i].text[i].drawFrontSideText(dateText[i]);
+       pushMatrix();
+         translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile(), 0);
+         tiles[i].text[i].drawFrontSideText(dateText[i]);
+       popMatrix();
      } else {
-       tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i]);
+       pushMatrix();
+         translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile(), 0);
+         rotateY(tiles[i].rotate);
+           tiles[i].text[i].drawFrontSideText(dateText[i]); // rotates away
+           tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i]);
+       popMatrix();
      }
    }
 }

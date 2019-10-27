@@ -62,7 +62,6 @@ class Tile {
         this.drawTile();   
     popMatrix();
     rotate -= rotationIncrement;
-    println(this.rotate);
   }
   
   //--------------------------------------------------

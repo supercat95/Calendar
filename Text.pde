@@ -46,12 +46,13 @@ class Text extends Tile {
   
   void drawFrontSideText(String dateText) {
     eventText = dateText;
-    text(eventText, xPosOfText, yPosOfText - (super.dimensionsOfTile/ 3.25));
+    text(eventText, 0, 0  - (tiles[0].dimensionsOfTile/ 3.25), 1);
   }
   
   void drawBackSideText(String eventDescription) {
     descriptionText = eventDescription;
-    text(descriptionText, xPosOfText, yPosOfText);
+    //scale(-1,0,0);
+    text(descriptionText, 0, 0, -1);
   }
   
 } // end of Text subclass
