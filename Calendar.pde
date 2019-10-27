@@ -166,19 +166,16 @@ void drawTheText() {
    textSize(tiles[0].getDimensionsOfTile() / 6.0);
    
    for (int i = 0; i < calendarText.length/3; i++) {
+     pushMatrix();
+     translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
      if (tiles[i].tileShouldRotate == false) {
-       pushMatrix();
-         translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile(), 0);
-         tiles[i].text[i].drawFrontSideText(dateText[i]);
-       popMatrix();
+       tiles[i].text[i].drawFrontSideText(dateText[i]);
      } else {
-       pushMatrix();
-         translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile(), 0);
-         rotateY(tiles[i].rotate);
-           tiles[i].text[i].drawFrontSideText(dateText[i]); // rotates away
-           tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i]);
-       popMatrix();
+       rotateY(tiles[i].rotate + .1);
+         tiles[i].text[i].drawFrontSideText(dateText[i]); // rotates away
+         tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i]);
      }
+     popMatrix();
    }
 }
 

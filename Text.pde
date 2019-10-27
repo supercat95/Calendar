@@ -51,8 +51,8 @@ class Text extends Tile {
   
   void drawBackSideText(String eventDescription) {
     descriptionText = eventDescription;
-    //scale(-1,0,0);
-    text(descriptionText, 0, 0, -1);
+    rotateY(PI);
+    text(descriptionText, 0, 0, 1);
   }
   
 } // end of Text subclass
