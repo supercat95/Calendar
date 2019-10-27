@@ -44,7 +44,6 @@ class Tile {
   //--------------------------------------------------
   void drawTile() {
     fill(#D6C527); // sticky note color
-    noStroke();
     rectMode(CENTER);
     rect(0, 0, getDimensionsOfTile(), getDimensionsOfTile(), 20);
 }

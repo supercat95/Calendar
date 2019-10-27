@@ -36,6 +36,8 @@ int widthOfCorkboard;
 int heightOfCorkboard;
 int sizeOfPixel = 5;
 
+PFont handwriting;
+
 void setup() {
   fullScreen(P3D);
   frameRate(30);
@@ -53,6 +55,7 @@ void setup() {
   
   setupBackground();
   
+  handwriting = createFont("BrownBagLunch.ttf", tiles[0].getDimensionsOfTile() / 4.5);
   createTextObjects();  
 }
 
@@ -175,8 +178,8 @@ void createTextObjects() {
 void drawTheText() {
    fill(0,0,0);
    textAlign(CENTER);
-   textLeading(tiles[0].getDimensionsOfTile() / 10.0);
-   textSize(tiles[0].getDimensionsOfTile() / 6.0);
+   textFont(handwriting);
+   textLeading(tiles[0].getDimensionsOfTile() / 4.0);
    
    for (int i = 0; i < numberOfEntries; i++) {
      pushMatrix();

@@ -1,24 +1,22 @@
 class Text extends Tile {
   // inherited from Tile:
   // float dimensionsOfTile;
-  
-  String eventText;
-  String descriptionText;
-  
+
   String[] eventMonths;
-  String eventDate;
   String[] eventDays;
   String[] eventYears;
   String[] eventTitles;
   String[] eventDescriptions;
-  String eventDescription;
+  
+  String eventText;
+  String descriptionText;
   
   float xPosOfText;
   float yPosOfText;
   
-  //==================================================
+  //================================================== 
   Text(float xPos, float yPos) {
-    super(xPos, yPos);
+    super(xPos,yPos);
     this.xPosOfText = super.xPosOfTile;
     this.yPosOfText = super.yPosOfTile;
   }
