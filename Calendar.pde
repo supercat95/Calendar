@@ -7,6 +7,7 @@
 String instructions = "You're going to make a custom calendar!\nOpen the text file called 'Text File'\nAdd a DATE (written in any standard US format), a TITLE for the event, and a DESCRIPTION, in that order, all on separate lines.\nYou can do this up to 4 times. Do not leave blank lines.\nSave the file, then Run Processing again.\n";
 
 String[] calendarText;
+int numberOfEntries;
 String[] userDefinedDates;
 String[] userDefinedTitles;
 String[] userDefinedDescriptions;
@@ -29,23 +30,20 @@ String[] textForFrontOfTile;
 
 int rotation = 0;
 
+color[] backgroundColor;
+color[][]corkboard;
+int widthOfCorkboard;
+int heightOfCorkboard;
+int sizeOfPixel = 5;
+
 void setup() {
   fullScreen(P3D);
   frameRate(30);
  
   // initializes and organizes variables based on user inputted data
   calendarText = loadStrings("Text File.txt");
-
-  userDefinedDates = new String[calendarText.length/3];
-  userDefinedTitles = new String[calendarText.length/3];
-  userDefinedDescriptions = new String[calendarText.length/3];
-  
-  months = new String[calendarText.length/3];
-  days = new String[calendarText.length/3];
-  years = new String[calendarText.length/3];
-  
-  dateText = new String[calendarText.length/3];
-  textForFrontOfTile = new String[calendarText.length/3];
+  numberOfEntries = calendarText.length/3;
+  setupAllStringArrays();
   
   labelUserInputtedLines();
   splitUserInputtedDate();
@@ -53,12 +51,13 @@ void setup() {
   createTileObjects();
   determinePositionsOfTilesBasedOnNumberOfTiles(); 
   
-  createTextObjects();
+  setupBackground();
   
+  createTextObjects();  
 }
 
 void draw() {
-  background(125,125,125);
+  drawBackground();
   
   drawTheTiles();
   
@@ -68,8 +67,21 @@ void draw() {
 }  
 
 // ----------------------------------------------------------------------------
+void setupAllStringArrays() {
+  userDefinedDates = new String[numberOfEntries];
+  userDefinedTitles = new String[numberOfEntries];
+  userDefinedDescriptions = new String[numberOfEntries];
+  
+  months = new String[numberOfEntries];
+  days = new String[numberOfEntries];
+  years = new String[numberOfEntries];
+  
+  dateText = new String[numberOfEntries];
+  textForFrontOfTile = new String[numberOfEntries];
+}
+
 void labelUserInputtedLines() {
-  for (int i = 0; i < calendarText.length/3; i ++) {
+  for (int i = 0; i < numberOfEntries; i ++) {
     userDefinedDates[i] = calendarText[i*3];
     userDefinedTitles[i] = calendarText[i*3+1];
     userDefinedDescriptions[i] = calendarText[i*3+2];   
@@ -77,7 +89,7 @@ void labelUserInputtedLines() {
 }
 
 void splitUserInputtedDate() {
-  for (int i = 0; i < calendarText.length/3; i++) {
+  for (int i = 0; i < numberOfEntries; i++) {
     dateSplitIntoComponents = splitTokens(userDefinedDates[i], "/-, ");
     
     months[i] = dateSplitIntoComponents[0]; 
@@ -89,6 +101,7 @@ void splitUserInputtedDate() {
 }
 
 // ----------------------------------------------------------------------------
+// I wish I was good enough at math to make an equation or algorithm of sorts for this....
 void determinePositionsOfTilesBasedOnNumberOfTiles() {
   switch(tiles.length) {
       case 1:
@@ -130,14 +143,14 @@ void determinePositionsOfTilesBasedOnNumberOfTiles() {
 
 // ----------------------------------------------------------------------------
 void createTileObjects() {
-  tiles = new Tile[calendarText.length/3];
-  for (int i = 0; i < calendarText.length/3; i++) {
+  tiles = new Tile[numberOfEntries];
+  for (int i = 0; i < numberOfEntries; i++) {
     tiles[i] = new Tile(xPosOfTiles, yPosOfTiles);
   }
 }
 
 void drawTheTiles() { 
-  for (int i = 0; i < calendarText.length/3; i++) {
+  for (int i = 0; i < numberOfEntries; i++) {
         if (tiles[i].tileShouldRotate) { 
           tiles[i].tileFlipsWhenClickedOn();
           if (tiles[i].rotate % -3.199999 == 0) { // stops the rotation animation
@@ -165,7 +178,7 @@ void drawTheText() {
    textLeading(tiles[0].getDimensionsOfTile() / 10.0);
    textSize(tiles[0].getDimensionsOfTile() / 6.0);
    
-   for (int i = 0; i < calendarText.length/3; i++) {
+   for (int i = 0; i < numberOfEntries; i++) {
      pushMatrix();
      translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
      if (tiles[i].tileShouldRotate == false) {
@@ -180,8 +193,38 @@ void drawTheText() {
 }
 
 // ----------------------------------------------------------------------------
+void setupBackground() {
+  widthOfCorkboard = width + sizeOfPixel + int(tiles[0].getDimensionsOfTile());
+  heightOfCorkboard = height + sizeOfPixel + int(tiles[0].getDimensionsOfTile());
+  
+  // colors from https://colorideas.net/pickled-bean-dark-gray-smoked-muddy-waters-d8c0a2-color-palette/
+  color[] backgroundColor  = {#6f402a, #94633b, #b89261, #0a0707, #47291d, #9c7255, #b89671};
+  corkboard = new color[widthOfCorkboard][heightOfCorkboard];
+  
+  for (int i = 0; i < widthOfCorkboard; i += sizeOfPixel) {
+    for (int j = 0; j < heightOfCorkboard; j += sizeOfPixel) {
+        corkboard[i][j] = backgroundColor[int(random(backgroundColor.length))];
+    }
+  }
+}
+
+void drawBackground() {
+  pushMatrix();
+    translate(0 - tiles[0].getDimensionsOfTile(), 0 - tiles[0].getDimensionsOfTile(), 0 - tiles[0].getDimensionsOfTile());
+    scale(1.25,1.25,0);
+      for (int i = 0; i < widthOfCorkboard; i += sizeOfPixel) {
+        for (int j = 0; j < heightOfCorkboard; j += sizeOfPixel) {
+          noStroke();
+          fill(corkboard[i][j]);
+          rect(i,j,sizeOfPixel,sizeOfPixel);
+        }
+      }
+  popMatrix();
+}
+
+// ----------------------------------------------------------------------------
 void mousePressed() {
- for (int i = 0; i < calendarText.length/3; i++) {
+ for (int i = 0; i < numberOfEntries; i++) {
     if (mouseX >= tiles[i].xPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseX <= tiles[i].xPosOfTile + (tiles[0].dimensionsOfTile / 2.0)
       && mouseY >= tiles[i].yPosOfTile - (tiles[0].dimensionsOfTile / 2.0) && mouseY <= tiles[i].yPosOfTile + (tiles[0].dimensionsOfTile / 2.0)) {
         tiles[i].tileIsClickedOn();

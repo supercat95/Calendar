@@ -43,11 +43,10 @@ class Tile {
   
   //--------------------------------------------------
   void drawTile() {
-    fill(255,255,255);
-    stroke(0,0,0);
-    strokeWeight(4);
+    fill(#D6C527); // sticky note color
+    noStroke();
     rectMode(CENTER);
-    rect(0, 0, getDimensionsOfTile(), getDimensionsOfTile());
+    rect(0, 0, getDimensionsOfTile(), getDimensionsOfTile(), 20);
 }
   
   void tileIsClickedOn() {
