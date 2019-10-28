@@ -27,6 +27,7 @@ class Text extends Tile {
     this.yPosOfText = super.yPosOfTile;
     textFlipped = false;
     descriptionWidth = 0;
+    leading = 0;
   }
   
   Text(float xPos, float yPos, String[] months, String[] days, String[] years, String[] titles, String[] descriptions) {
@@ -42,6 +43,7 @@ class Text extends Tile {
  
     textFlipped = false;
     descriptionWidth = 0;
+    leading = 0;
   }
   
   //==================================================
@@ -60,9 +62,10 @@ class Text extends Tile {
   }
   
   //--------------------------------------------------
-   void setLeadingForBackSideText() {
+   void setLeadingForBackSideText(String eventDescription) {
+    descriptionText = eventDescription; 
     descriptionWidth = textWidth(descriptionText);
-    numberOfLinesNeeded = ceil(super.getDimensionsOfTile() / descriptionWidth * 10);
+    numberOfLinesNeeded = ceil(descriptionWidth / int(super.getDimensionsOfTile()) + 2);
     leading = int(super.getDimensionsOfTile()) / numberOfLinesNeeded;
   }
   
@@ -73,8 +76,7 @@ class Text extends Tile {
   void drawBackSideText(String eventDescription, float rotation) {
     descriptionText = eventDescription;   
     rotateY(rotation); 
-    setLeadingForBackSideText();
-    textLeading(getLeading());
+    textLeading(this.getLeading());
     translate(0,0,1);
     text(descriptionText, 0, 0, tiles[0].dimensionsOfTile, tiles[0].dimensionsOfTile); 
   }

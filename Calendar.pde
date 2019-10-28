@@ -67,6 +67,7 @@ void setup() {
 void draw() {
   drawBackground();
   
+  instructions();
   drawTheTiles();
   
   if (tiles.length != 0) {
@@ -193,6 +194,7 @@ void drawTheText() {
    textFont(handwriting);
    
    for (int i = 0; i < numberOfEntries; i++) {
+     tiles[i].text[i].setLeadingForBackSideText(userDefinedDescriptions[i]);
      pushMatrix();
      translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
      if (tiles[i].tileShouldRotate == false) {
