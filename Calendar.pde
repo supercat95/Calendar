@@ -4,7 +4,7 @@
     Calendar
 */
 
-String instructions = "You're going to make a custom calendar!\nOpen the text file called 'Text File'\nAdd a DATE (written in any standard US format), a TITLE for the event, and a DESCRIPTION, in that order, all on separate lines.\nYou can do this up to 4 times. Do not leave blank lines.\nSave the file, then Run Processing again.\n";
+String instructions = "You're going to make a custom calendar!\nOpen the text file called 'Text File' and add:\na DATE (written in any US format),\na TITLE for the event,\nand a DESCRIPTION,\nin that order, all on separate lines.\nYou can do this up to 4 times.\nDo not leave blank lines.\nSave the file, then Run Processing again. :)\n";
 
 String[] calendarText;
 int numberOfEntries;
@@ -55,7 +55,12 @@ void setup() {
   
   setupBackground();
   
-  handwriting = createFont("BrownBagLunch.ttf", tiles[0].getDimensionsOfTile() / 4.5);
+  if (tiles.length != 0) {
+    handwriting = createFont("BrownBagLunch.ttf", tiles[0].getDimensionsOfTile() / 4.5);
+  } else {
+    handwriting = createFont("BrownBagLunch.ttf", width/20);
+  }
+  
   createTextObjects();  
 }
 
@@ -118,12 +123,12 @@ void determinePositionsOfTilesBasedOnNumberOfTiles() {
         tiles[1].yPosOfTile = height/2;
         break;
       case 3:
-        tiles[0].xPosOfTile = width/6;
-        tiles[0].yPosOfTile = height/4;
-        tiles[1].xPosOfTile = 5*width/6;
-        tiles[1].yPosOfTile = height/4;
+        tiles[0].xPosOfTile = width/5;
+        tiles[0].yPosOfTile = height/3;
+        tiles[1].xPosOfTile = 4*width/5;
+        tiles[1].yPosOfTile = height/3;
         tiles[2].xPosOfTile = width/2;
-        tiles[2].yPosOfTile = 3*height/4;
+        tiles[2].yPosOfTile = 2*height/3;
         break;
       case 4:
         tiles[0].xPosOfTile = 3*width/10;
@@ -135,13 +140,20 @@ void determinePositionsOfTilesBasedOnNumberOfTiles() {
         tiles[3].xPosOfTile = 7*width/10;
         tiles[3].yPosOfTile = 3*height/4;
         break;
-      default: // prints instructions on screen
-        textAlign(CENTER);
-        textSize(20);
-        textLeading(50);
-        text(instructions, width/2, 2*height/5);
+      default:      
         break;
     }
+}
+
+// ----------------------------------------------------------------------------
+void instructions() {
+  fill(#D6C527);
+  rectMode(CENTER);
+  rect(width/2, height/2, 3*width/4, 3*height/4, 20);
+  fill(255,255,255);
+  textFont(handwriting);
+  textLeading(height/13);
+  text(instructions, 11*width/20, height/2, 3*width/4, 3*height/4);
 }
 
 // ----------------------------------------------------------------------------
@@ -161,7 +173,7 @@ void drawTheTiles() {
           }
         } else {
         pushMatrix();
-          translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
+          translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile(), 0);
             tiles[i].drawTile();
         popMatrix();
         }
@@ -179,26 +191,35 @@ void drawTheText() {
    fill(0,0,0);
    textAlign(CENTER);
    textFont(handwriting);
-   textLeading(tiles[0].getDimensionsOfTile() / 4.0);
    
    for (int i = 0; i < numberOfEntries; i++) {
      pushMatrix();
      translate(tiles[i].get_xPosOfTile(), tiles[i].get_yPosOfTile());
      if (tiles[i].tileShouldRotate == false) {
-       tiles[i].text[i].drawFrontSideText(dateText[i]);
+        if (tiles[i].text[i].textFlipped == false) {
+           tiles[i].text[i].drawFrontSideText(dateText[i]);
+        } else {
+          tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i], 0.0);
+        }
      } else {
        rotateY(tiles[i].rotate + .1);
          tiles[i].text[i].drawFrontSideText(dateText[i]); // rotates away
-         tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i]);
-     }
-     popMatrix();
+         tiles[i].text[i].drawBackSideText(userDefinedDescriptions[i], PI);      
+       tiles[i].text[i].textFlipped = true;
+     } 
+    popMatrix();
    }
 }
 
 // ----------------------------------------------------------------------------
 void setupBackground() {
-  widthOfCorkboard = width + sizeOfPixel + int(tiles[0].getDimensionsOfTile());
-  heightOfCorkboard = height + sizeOfPixel + int(tiles[0].getDimensionsOfTile());
+  if (tiles.length != 0) {
+    widthOfCorkboard = width + sizeOfPixel + int(tiles[0].getDimensionsOfTile());
+    heightOfCorkboard = height + sizeOfPixel + int(tiles[0].getDimensionsOfTile());
+  } else {
+    widthOfCorkboard = width + sizeOfPixel;
+    heightOfCorkboard = height + sizeOfPixel;
+  }
   
   // colors from https://colorideas.net/pickled-bean-dark-gray-smoked-muddy-waters-d8c0a2-color-palette/
   color[] backgroundColor  = {#6f402a, #94633b, #b89261, #0a0707, #47291d, #9c7255, #b89671};
@@ -213,7 +234,9 @@ void setupBackground() {
 
 void drawBackground() {
   pushMatrix();
+  if (tiles.length != 0) {
     translate(0 - tiles[0].getDimensionsOfTile(), 0 - tiles[0].getDimensionsOfTile(), 0 - tiles[0].getDimensionsOfTile());
+  }
     scale(1.25,1.25,0);
       for (int i = 0; i < widthOfCorkboard; i += sizeOfPixel) {
         for (int j = 0; j < heightOfCorkboard; j += sizeOfPixel) {

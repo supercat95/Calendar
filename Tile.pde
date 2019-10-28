@@ -46,7 +46,7 @@ class Tile {
     fill(#D6C527); // sticky note color
     rectMode(CENTER);
     rect(0, 0, getDimensionsOfTile(), getDimensionsOfTile(), 20);
-}
+  }
   
   void tileIsClickedOn() {
     this.tileShouldRotate = !tileShouldRotate;
@@ -55,7 +55,7 @@ class Tile {
   
   void tileFlipsWhenClickedOn() {
     pushMatrix();
-      translate(this.get_xPosOfTile(), this.get_yPosOfTile(), 0);
+      translate(this.get_xPosOfTile(), this.get_yPosOfTile());
       rotateY(rotate);
         this.drawTile();   
     popMatrix();

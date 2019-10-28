@@ -1,6 +1,6 @@
 01/01/2017
 Event Title 
-Description 1
+This is a very long phrase for Description 1
 February 20, 2018
 Event Title 2
 Description 2

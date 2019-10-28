@@ -1,6 +1,7 @@
 class Text extends Tile {
   // inherited from Tile:
   // float dimensionsOfTile;
+  // float rotate
 
   String[] eventMonths;
   String[] eventDays;
@@ -8,8 +9,13 @@ class Text extends Tile {
   String[] eventTitles;
   String[] eventDescriptions;
   
+  boolean textFlipped;
   String eventText;
   String descriptionText;
+  
+  float descriptionWidth;
+  int numberOfLinesNeeded;
+  int leading;
   
   float xPosOfText;
   float yPosOfText;
@@ -19,6 +25,8 @@ class Text extends Tile {
     super(xPos,yPos);
     this.xPosOfText = super.xPosOfTile;
     this.yPosOfText = super.yPosOfTile;
+    textFlipped = false;
+    descriptionWidth = 0;
   }
   
   Text(float xPos, float yPos, String[] months, String[] days, String[] years, String[] titles, String[] descriptions) {
@@ -31,6 +39,9 @@ class Text extends Tile {
     this.eventYears = years;
     this.eventTitles = titles;
     this.eventDescriptions = descriptions;
+ 
+    textFlipped = false;
+    descriptionWidth = 0;
   }
   
   //==================================================
@@ -44,13 +55,28 @@ class Text extends Tile {
   
   void drawFrontSideText(String dateText) {
     eventText = dateText;
+    textLeading(super.getDimensionsOfTile() / 4.0);
     text(eventText, 0, 0  - (tiles[0].dimensionsOfTile/ 3.25), 1);
   }
   
-  void drawBackSideText(String eventDescription) {
-    descriptionText = eventDescription;
-    rotateY(PI);
-    text(descriptionText, 0, 0, 1);
+  //--------------------------------------------------
+   void setLeadingForBackSideText() {
+    descriptionWidth = textWidth(descriptionText);
+    numberOfLinesNeeded = ceil(super.getDimensionsOfTile() / descriptionWidth * 10);
+    leading = int(super.getDimensionsOfTile()) / numberOfLinesNeeded;
+  }
+  
+  int getLeading() {
+    return leading;
+  }
+  
+  void drawBackSideText(String eventDescription, float rotation) {
+    descriptionText = eventDescription;   
+    rotateY(rotation); 
+    setLeadingForBackSideText();
+    textLeading(getLeading());
+    translate(0,0,1);
+    text(descriptionText, 0, 0, tiles[0].dimensionsOfTile, tiles[0].dimensionsOfTile); 
   }
   
 } // end of Text subclass
